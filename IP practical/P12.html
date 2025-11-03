@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ice Cream Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #e91e63;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #e91e63;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffc3a0;
+        }
+
+        /* Toppings Styles */
+        .toppings-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .topping-category {
+            background: #fff9f9;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #e91e63;
+        }
+
+        .topping-category h3 {
+            color: #e91e63;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topping-list {
+            list-style: none;
+        }
+
+        .topping-list li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: white;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid #ffecec;
+        }
+
+        .topping-list li:hover {
+            transform: translateX(5px);
+            background: #fff5f5;
+            border-color: #e91e63;
+            box-shadow: 0 3px 10px rgba(233, 30, 99, 0.1);
+        }
+
+        .topping-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topping-price {
+            background: #e91e63;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .popular {
+            background: linear-gradient(135deg, #fff5f5, #ffecec);
+            border: 2px solid #e91e63;
+            position: relative;
+        }
+
+        .popular::before {
+            content: "⭐ Popular";
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #e91e63;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        /* Table Styles */
+        .menu-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        .menu-table th {
+            background: #e91e63;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .menu-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-table tr:hover {
+            background: #fff9f9;
+        }
+
+        .price {
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            color: #666;
+            margin-top: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Simple animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .topping-category {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .topping-category:nth-child(1) { animation-delay: 0.1s; }
+        .topping-category:nth-child(2) { animation-delay: 0.2s; }
+        .topping-category:nth-child(3) { animation-delay: 0.3s; }
+        .topping-category:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍦 Ice Cream Shop</h1>
+            <p>Delicious toppings for your favorite ice cream</p>
+        </header>
+
+        <!-- Menu Table -->
+        <section class="section">
+            <h2>Ice Cream Flavors</h2>
+            <table class="menu-table">
+                <tr>
+                    <th>Flavor</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+                <tr>
+                    <td>Vanilla Dream</td>
+                    <td>Classic creamy vanilla with real beans</td>
+                    <td class="price">$4.99</td>
+                </tr>
+                <tr>
+                    <td>Chocolate Fantasy</td>
+                    <td>Rich Belgian chocolate</td>
+                    <td class="price">$5.49</td>
+                </tr>
+                <tr>
+                    <td>Strawberry Bliss</td>
+                    <td>Fresh strawberry pieces</td>
+                    <td class="price">$5.29</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Toppings Section -->
+        <section class="section">
+            <h2>✨ Premium Toppings</h2>
+            <p style="color: #666; margin-bottom: 20px;">Mix and match to create your perfect sundae!</p>
+            
+            <div class="toppings-container">
+                <!-- Sweet Toppings -->
+                <div class="topping-category">
+                    <h3>🍯 Sweet Sauces</h3>
+                    <ul class="topping-list">
+                        <li class="popular">
+                            <span class="topping-name">Hot Fudge</span>
+                            <span class="topping-price">$0.99</span>
+                        </li>
+                        <li>
+                            <span class="topping-name">Caramel Sauce</span>
+                            <span class="topping-price">$0.99</span>
+                        </li>
+                        <li>
+                            <span class="topping-name">Strawberry Syrup</span>
+                            <span class="topping-price">$0.79</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Crunchy Toppings -->
+                <div class="topping-category">
+                    <h3>🥜 Crunchy Mix-ins</h3>
+                    <ul class="topping-list">
+                        <li class="popular">
+                            <span class="topping-name">Crushed Oreos</span>
+                            <span class="topping-price">$1.29</span>
+                        </li>
+                        <li>
+                            <span class="topping-name">Peanuts</span>
+                            <span class="topping-price">$0.89</span>
+                        </li>
+                        <li>
+                            <span class="topping-name">Almonds</span>
+                            <span class="topping-price">$1.09</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Fruit Toppings -->
+                <div class="topping-category">
+                    <h3>🍓 Fresh Fruits</h3>
+                    <ul class="topping-list">
+                        <li>
+                            <span class="topping-name">Fresh Strawberries</span>
+                            <span class="topping-price">$1.49</span>
+                        </li>
+                        <li>
+                            <span class="topping-name">Blueberries</span>
+                            <span class="topping-price">$1.29</span>
+                        </li>
+                        <li class="popular">
+                            <span class="topping-name">Banana Slices</span>
+                            <span class="topping-price">$0.89</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Special Toppings -->
+                <div class="topping-category">
+                    <h3>🎉 Special Treats</h3>
+                    <ul class="topping-list">
+                        <li class="popular">
+                            <span class="topping-name">Rainbow Sprinkles</span>
+                            <span class="topping-price">$0.59</span>
+                        </li>
+                        <li>
+                            <span class="topping-name">Whipped Cream</span>
+                            <span class="topping-price">$0.49</span>
+                        </li>
+                        <li>
+                            <span class="topping-name">Gummy Bears</span>
+                            <span class="topping-price">$0.99</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>📍 123 Sweet Street | 🕒 Open 12PM-10PM | 📞 (555) 123-ICECREAM</p>
+            <p>&copy; 2024 Ice Cream Shop - Made with ❤️ and lots of 🍦</p>
+        </footer>
+    </div>
+</body>
+</html>
