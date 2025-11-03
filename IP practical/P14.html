@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Interest Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #ecf0f1;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .result h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .result-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simple Interest Calculator</h1>
+        
+        <div class="input-group">
+            <label for="principal">Principal Amount (₹):</label>
+            <input type="number" id="principal" placeholder="Enter principal amount">
+        </div>
+
+        <div class="input-group">
+            <label for="rate">Rate of Interest (% per year):</label>
+            <input type="number" id="rate" placeholder="Enter rate of interest">
+        </div>
+
+        <div class="input-group">
+            <label for="years">Number of Years:</label>
+            <input type="number" id="years" placeholder="Enter number of years">
+        </div>
+
+        <button onclick="calculateInterest()">Calculate Simple Interest</button>
+        <button onclick="resetForm()" style="background: #95a5a6;">Reset</button>
+
+        <div class="result" id="result">
+            <h3>Calculation Results</h3>
+            <div class="result-item">
+                <strong>Principal Amount:</strong> ₹<span id="resultPrincipal">0</span>
+            </div>
+            <div class="result-item">
+                <strong>Rate of Interest:</strong> <span id="resultRate">0</span>%
+            </div>
+            <div class="result-item">
+                <strong>Time Period:</strong> <span id="resultYears">0</span> years
+            </div>
+            <div class="result-item" style="background: #2ecc71; color: white;">
+                <strong>Simple Interest:</strong> ₹<span id="resultInterest">0</span>
+            </div>
+            <div class="result-item" style="background: #3498db; color: white;">
+                <strong>Total Amount:</strong> ₹<span id="resultTotal">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to calculate simple interest
+        function calculateSimpleInterest(principal, rate, years) {
+            // Formula: SI = (P * R * T) / 100
+            const interest = (principal * rate * years) / 100;
+            return interest;
+        }
+
+        // Function to handle calculation and display results
+        function calculateInterest() {
+            // Get input values
+            const principal = parseFloat(document.getElementById('principal').value);
+            const rate = parseFloat(document.getElementById('rate').value);
+            const years = parseFloat(document.getElementById('years').value);
+
+            // Validate inputs
+            if (isNaN(principal) || isNaN(rate) || isNaN(years)) {
+                alert('Please enter valid numbers in all fields!');
+                return;
+            }
+
+            if (principal <= 0 || rate <= 0 || years <= 0) {
+                alert('Please enter positive values greater than zero!');
+                return;
+            }
+
+            // Calculate simple interest using the function
+            const interest = calculateSimpleInterest(principal, rate, years);
+            const totalAmount = principal + interest;
+
+            // Display results
+            document.getElementById('resultPrincipal').textContent = principal.toFixed(2);
+            document.getElementById('resultRate').textContent = rate.toFixed(2);
+            document.getElementById('resultYears').textContent = years;
+            document.getElementById('resultInterest').textContent = interest.toFixed(2);
+            document.getElementById('resultTotal').textContent = totalAmount.toFixed(2);
+
+            // Show result section
+            document.getElementById('result').style.display = 'block';
+
+            // Also show in console
+            console.log('=== Simple Interest Calculation ===');
+            console.log(`Principal: ₹${principal}`);
+            console.log(`Rate: ${rate}% per year`);
+            console.log(`Time: ${years} years`);
+            console.log(`Simple Interest: ₹${interest.toFixed(2)}`);
+            console.log(`Total Amount: ₹${totalAmount.toFixed(2)}`);
+        }
+
+        // Function to reset the form
+        function resetForm() {
+            document.getElementById('principal').value = '';
+            document.getElementById('rate').value = '';
+            document.getElementById('years').value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+
+        // Allow Enter key to calculate
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                calculateInterest();
+            }
+        });
+    </script>
+</body>
+</html>

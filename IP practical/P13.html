@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .input-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .output {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .student-card {
+            background: #ecf0f1;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+
+        .basic-info {
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Student Manager</h1>
+            <p>Enter student details below</p>
+        </div>
+
+        <!-- Student 1 -->
+        <div class="input-section">
+            <h3>Student 1</h3>
+            <div class="input-group">
+                <label>Name:</label>
+                <input type="text" id="name1" placeholder="Enter name">
+            </div>
+            <div class="input-group">
+                <label>Age:</label>
+                <input type="number" id="age1" placeholder="Enter age">
+            </div>
+            <div class="input-group">
+                <label>Course:</label>
+                <input type="text" id="course1" placeholder="Enter course">
+            </div>
+            <div class="input-group">
+                <label>Marks:</label>
+                <input type="number" id="marks1" placeholder="Enter marks">
+            </div>
+        </div>
+
+        <!-- Student 2 -->
+        <div class="input-section">
+            <h3>Student 2</h3>
+            <div class="input-group">
+                <label>Name:</label>
+                <input type="text" id="name2" placeholder="Enter name">
+            </div>
+            <div class="input-group">
+                <label>Age:</label>
+                <input type="number" id="age2" placeholder="Enter age">
+            </div>
+            <div class="input-group">
+                <label>Course:</label>
+                <input type="text" id="course2" placeholder="Enter course">
+            </div>
+            <div class="input-group">
+                <label>Marks:</label>
+                <input type="number" id="marks2" placeholder="Enter marks">
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons">
+            <button class="btn-primary" onclick="createStudents()">Create Students</button>
+            <button class="btn-secondary" onclick="displayInConsole()">Show in Console</button>
+            <button class="btn-danger" onclick="resetForm()">Reset</button>
+        </div>
+
+        <!-- Output -->
+        <div class="output" id="output">
+            <h3>Student Details</h3>
+            <div id="studentDisplay"></div>
+        </div>
+    </div>
+
+    <script>
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+
+            display() {
+                return `Name: ${this.name}, Age: ${this.age}`;
+            }
+        }
+
+        class Student extends Person {
+            constructor(name, age, course, marks) {
+                super(name, age);
+                this.course = course;
+                this.marks = marks;
+            }
+
+            display() {
+                return `${super.display()}, Course: ${this.course}, Marks: ${this.marks}`;
+            }
+
+            displayBasicInfo() {
+                return `${this.name} (Age: ${this.age})`;
+            }
+        }
+
+        let student1 = null;
+        let student2 = null;
+
+        function createStudents() {
+            const name1 = document.getElementById('name1').value.trim();
+            const age1 = document.getElementById('age1').value;
+            const course1 = document.getElementById('course1').value.trim();
+            const marks1 = document.getElementById('marks1').value;
+
+            const name2 = document.getElementById('name2').value.trim();
+            const age2 = document.getElementById('age2').value;
+            const course2 = document.getElementById('course2').value.trim();
+            const marks2 = document.getElementById('marks2').value;
+
+            if (!name1 || !age1 || !course1 || !marks1 || !name2 || !age2 || !course2 || !marks2) {
+                alert('Please fill all fields!');
+                return;
+            }
+
+            student1 = new Student(name1, parseInt(age1), course1, parseInt(marks1));
+            student2 = new Student(name2, parseInt(age2), course2, parseInt(marks2));
+
+            displayStudents();
+        }
+
+        function displayStudents() {
+            const output = document.getElementById('output');
+            const studentDisplay = document.getElementById('studentDisplay');
+
+            studentDisplay.innerHTML = `
+                <div class="student-card">
+                    <strong>Student 1:</strong><br>
+                    ${student1.display()}
+                </div>
+                <div class="student-card">
+                    <strong>Student 2:</strong><br>
+                    ${student2.display()}
+                </div>
+                <div class="basic-info">
+                    <strong>Basic Info (Name & Age):</strong><br>
+                    ${student1.displayBasicInfo()} | ${student2.displayBasicInfo()}
+                </div>
+            `;
+
+            output.style.display = 'block';
+        }
+
+        function displayInConsole() {
+            if (student1 && student2) {
+                console.log("=== Student Details ===");
+                console.log("Student 1:", student1.display());
+                console.log("Student 2:", student2.display());
+                console.log("=== Basic Info ===");
+                console.log(student1.displayBasicInfo());
+                console.log(student2.displayBasicInfo());
+                alert('Check console for details!');
+            } else {
+                alert('Create students first!');
+            }
+        }
+
+        function resetForm() {
+            document.querySelectorAll('input').forEach(input => input.value = '');
+            document.getElementById('output').style.display = 'none';
+            student1 = null;
+            student2 = null;
+        }
+    </script>
+</body>
+</html>
