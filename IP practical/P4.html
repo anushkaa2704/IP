@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust Travel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .logo span {
+            color: #764ba2;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #667eea;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #667eea;
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8)), 
+                        url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+        
+        .sidebar h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar li {
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar li:hover {
+            background: #f8f9ff;
+            transform: translateX(5px);
+        }
+        
+        .sidebar a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar a i {
+            margin-right: 10px;
+            color: #667eea;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .frame-container {
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .frame-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+        
+        .lists-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .list-card {
+            background: #f8f9ff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .list-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .list-card h3 i {
+            margin-right: 10px;
+        }
+        
+        .list-card ul {
+            list-style: none;
+        }
+        
+        .list-card li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .list-card li:before {
+            content: "•";
+            color: #667eea;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #764ba2;
+        }
+        
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .lists-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Wander<span>lust</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#deals">Deals</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Discover Your Next Adventure</h1>
+            <p>Explore breathtaking destinations and create memories that last a lifetime with our curated travel experiences</p>
+            <a href="#destinations" class="btn">Explore Destinations</a>
+        </div>
+    </section>
+    
+    <div class="container">
+        <div class="main-content">
+            <aside class="sidebar">
+                <h2>Popular Destinations</h2>
+                <ul>
+                    <li><a href="#bali"><i class="fas fa-umbrella-beach"></i> Bali, Indonesia</a></li>
+                    <li><a href="#paris"><i class="fas fa-monument"></i> Paris, France</a></li>
+                    <li><a href="#tokyo"><i class="fas fa-torii-gate"></i> Tokyo, Japan</a></li>
+                    <li><a href="#santorini"><i class="fas fa-water"></i> Santorini, Greece</a></li>
+                    <li><a href="#newyork"><i class="fas fa-city"></i> New York, USA</a></li>
+                    <li><a href="#barcelona"><i class="fas fa-archway"></i> Barcelona, Spain</a></li>
+                </ul>
+                
+                <h2>Travel Resources</h2>
+                <ul>
+                    <li><a href="https://www.booking.com" target="_blank"><i class="fas fa-hotel"></i> Booking.com</a></li>
+                    <li><a href="https://www.skyscanner.com" target="_blank"><i class="fas fa-plane"></i> Skyscanner</a></li>
+                    <li><a href="https://www.tripadvisor.com" target="_blank"><i class="fas fa-map-marked-alt"></i> TripAdvisor</a></li>
+                    <li><a href="https://www.lonelyplanet.com" target="_blank"><i class="fas fa-book-open"></i> Lonely Planet</a></li>
+                </ul>
+            </aside>
+            
+            <main class="content">
+                <h2 class="section-title">Travel Inspiration</h2>
+                
+                <div class="frame-container">
+                    <iframe src="./Wildlife Windows 7 Sample Video.mp4" title="Travel Video" allowfullscreen></iframe>
+                </div>
+                
+                <div class="lists-grid">
+                    <div class="list-card">
+                        <h3><i class="fas fa-lightbulb"></i> Travel Tips</h3>
+                        <ul>
+                            <li>Pack light and versatile clothing</li>
+                            <li>Learn basic local phrases</li>
+                            <li>Always have travel insurance</li>
+                            <li>Keep digital copies of documents</li>
+                            <li>Research local customs</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="list-card">
+                        <h3><i class="fas fa-heart"></i> Must-Visit Places</h3>
+                        <ul>
+                            <li>Santorini, Greece</li>
+                            <li>Kyoto, Japan</li>
+                            <li>Rome, Italy</li>
+                            <li>Bali, Indonesia</li>
+                            <li>Machu Picchu, Peru</li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="logo">Wander<span>lust</span></div>
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact Us</a>
+                <a href="#about">About</a>
+            </div>
+            <p class="copyright">© 2023 Wanderlust Travel. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
