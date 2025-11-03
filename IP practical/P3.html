@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Feedback Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #4a6ee0 0%, #6a4ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 2rem;
+        }
+        
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .form-section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #4a6ee0;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f4ff;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #4a6ee0;
+            box-shadow: 0 0 0 3px rgba(74, 110, 224, 0.2);
+        }
+        
+        .rating-options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+        
+        .rating-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .rating-item input {
+            width: auto;
+            margin-bottom: 0.5rem;
+        }
+        
+        .rating-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #666;
+        }
+        
+        .feedback-question {
+            background: #f8f9ff;
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #4a6ee0;
+        }
+        
+        .feedback-question p {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        button {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn {
+            background: #4a6ee0;
+            color: white;
+        }
+        
+        .submit-btn:hover {
+            background: #3a5ec0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 110, 224, 0.3);
+        }
+        
+        .reset-btn {
+            background: #f0f4ff;
+            color: #4a6ee0;
+        }
+        
+        .reset-btn:hover {
+            background: #e0e8ff;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        @media (max-width: 768px) {
+            .rating-options {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .rating-item {
+                flex: 0 0 calc(50% - 1rem);
+            }
+            
+            .button-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .rating-item {
+                flex: 0 0 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>College Feedback Form</h1>
+            <p>Help us improve by sharing your valuable feedback</p>
+        </header>
+        
+        <div class="form-container">
+            <form id="feedbackForm">
+                <!-- Personal Information Section -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-user-graduate"></i> Student Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="name" class="required">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="required">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your college email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact" class="required">Contact Number</label>
+                        <input type="tel" id="contact" name="contact" placeholder="Enter your phone number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="country" class="required">Country</label>
+                        <select id="country" name="country" required>
+                            <option value="">Select your country</option>
+                            <option value="usa">United States</option>
+                            <option value="india">India</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="canada">Canada</option>
+                            <option value="australia">Australia</option>
+                            <option value="germany">Germany</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="college" class="required">College Name</label>
+                        <input type="text" id="college" name="college" placeholder="Enter your college name" required>
+                    </div>
+                </div>
+                
+                <!-- Feedback Questions Section -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-comment-dots"></i> Feedback Questions</h2>
+                    
+                    <div class="feedback-question">
+                        <p>1. The teaching staff is knowledgeable and effective in delivering course content.</p>
+                        <div class="rating-options">
+                            <div class="rating-item">
+                                <input type="radio" id="q1-strongly-disagree" name="q1" value="strongly-disagree" required>
+                                <label for="q1-strongly-disagree" class="rating-label">Strongly Disagree</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q1-disagree" name="q1" value="disagree">
+                                <label for="q1-disagree" class="rating-label">Disagree</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q1-neutral" name="q1" value="neutral">
+                                <label for="q1-neutral" class="rating-label">Neutral</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q1-agree" name="q1" value="agree">
+                                <label for="q1-agree" class="rating-label">Agree</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q1-strongly-agree" name="q1" value="strongly-agree">
+                                <label for="q1-strongly-agree" class="rating-label">Strongly Agree</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feedback-question">
+                        <p>2. The college infrastructure and facilities meet my academic needs.</p>
+                        <div class="rating-options">
+                            <div class="rating-item">
+                                <input type="radio" id="q2-strongly-disagree" name="q2" value="strongly-disagree" required>
+                                <label for="q2-strongly-disagree" class="rating-label">Strongly Disagree</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q2-disagree" name="q2" value="disagree">
+                                <label for="q2-disagree" class="rating-label">Disagree</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q2-neutral" name="q2" value="neutral">
+                                <label for="q2-neutral" class="rating-label">Neutral</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q2-agree" name="q2" value="agree">
+                                <label for="q2-agree" class="rating-label">Agree</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q2-strongly-agree" name="q2" value="strongly-agree">
+                                <label for="q2-strongly-agree" class="rating-label">Strongly Agree</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feedback-question">
+                        <p>3. The curriculum is relevant and prepares students for future careers.</p>
+                        <div class="rating-options">
+                            <div class="rating-item">
+                                <input type="radio" id="q3-strongly-disagree" name="q3" value="strongly-disagree" required>
+                                <label for="q3-strongly-disagree" class="rating-label">Strongly Disagree</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q3-disagree" name="q3" value="disagree">
+                                <label for="q3-disagree" class="rating-label">Disagree</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q3-neutral" name="q3" value="neutral">
+                                <label for="q3-neutral" class="rating-label">Neutral</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q3-agree" name="q3" value="agree">
+                                <label for="q3-agree" class="rating-label">Agree</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q3-strongly-agree" name="q3" value="strongly-agree">
+                                <label for="q3-strongly-agree" class="rating-label">Strongly Agree</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feedback-question">
+                        <p>4. The college provides adequate support for student development and extracurricular activities.</p>
+                        <div class="rating-options">
+                            <div class="rating-item">
+                                <input type="radio" id="q4-strongly-disagree" name="q4" value="strongly-disagree" required>
+                                <label for="q4-strongly-disagree" class="rating-label">Strongly Disagree</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q4-disagree" name="q4" value="disagree">
+                                <label for="q4-disagree" class="rating-label">Disagree</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q4-neutral" name="q4" value="neutral">
+                                <label for="q4-neutral" class="rating-label">Neutral</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q4-agree" name="q4" value="agree">
+                                <label for="q4-agree" class="rating-label">Agree</label>
+                            </div>
+                            <div class="rating-item">
+                                <input type="radio" id="q4-strongly-agree" name="q4" value="strongly-agree">
+                                <label for="q4-strongly-agree" class="rating-label">Strongly Agree</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Comments -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-edit"></i> Additional Comments</h2>
+                    
+                    <div class="form-group">
+                        <label for="comments">Any other suggestions or comments:</label>
+                        <textarea id="comments" name="comments" rows="4" placeholder="Please share any additional feedback or suggestions..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Buttons -->
+                <div class="button-group">
+                    <button type="reset" class="reset-btn">Reset Form</button>
+                    <button type="submit" class="submit-btn">Submit Feedback</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Form submission handler
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your valuable feedback!');
+            // In a real application, you would submit the form data to a server here
+        });
+    </script>
+</body>
+</html>
