@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Explorer Travel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background-color: #5a67d8;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav li {
+            margin: 0 1.5rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #5a67d8;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .destinations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .destination-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .destination-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-content h3 {
+            margin-bottom: 0.5rem;
+            color: #5a67d8;
+        }
+        
+        .card-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .card-content a {
+            display: inline-block;
+            background-color: #5a67d8;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .card-content a:hover {
+            background-color: #4c51bf;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        th, td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        th {
+            background-color: #5a67d8;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .travel-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .travel-links a {
+            display: inline-flex;
+            align-items: center;
+            background: white;
+            color: #5a67d8;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .travel-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            background-color: #5a67d8;
+            color: white;
+        }
+        
+        .travel-links a i {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            background-color: #5a67d8;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .footer-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            margin-top: 1.5rem;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .destinations {
+                grid-template-columns: 1fr;
+            }
+            
+            .travel-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .travel-links a {
+                width: 80%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Global Explorer Travel</h1>
+            <p>Discover amazing destinations around the world</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#destinations">Destinations</a></li>
+                <li><a href="#info">Travel Info</a></li>
+                <li><a href="#links">Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section id="destinations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Popular Destinations</h2>
+                <p>Explore our handpicked selection of amazing travel destinations</p>
+            </div>
+            
+            <div class="destinations">
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bali">
+                    <div class="card-content">
+                        <h3>Bali, Indonesia</h3>
+                        <p>Experience the magic of Bali with its beautiful beaches, vibrant culture, and stunning temples.</p>
+                        <a href="https://www.bali.com" target="_blank">Explore Bali</a>
+                    </div>
+                </div>
+                
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Santorini">
+                    <div class="card-content">
+                        <h3>Santorini, Greece</h3>
+                        <p>Discover the iconic white buildings and breathtaking sunsets of this Greek paradise.</p>
+                        <a href="https://www.santorini.com" target="_blank">Explore Santorini</a>
+                    </div>
+                </div>
+                
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Kyoto">
+                    <div class="card-content">
+                        <h3>Kyoto, Japan</h3>
+                        <p>Immerse yourself in ancient traditions, beautiful gardens, and stunning temples.</p>
+                        <a href="https://www.japan-guide.com/e/e2158.html" target="_blank">Explore Kyoto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="info" style="background-color: #f0f4f8;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Travel Information</h2>
+                <p>Everything you need to know for your perfect getaway</p>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Destination</th>
+                        <th>Best Time to Visit</th>
+                        <th>Average Cost (7 days)</th>
+                        <th>Visa Requirements</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bali, Indonesia</td>
+                        <td>April - October</td>
+                        <td>$800 - $1,500</td>
+                        <td>Visa on arrival for most countries</td>
+                    </tr>
+                    <tr>
+                        <td>Santorini, Greece</td>
+                        <td>May - October</td>
+                        <td>$1,200 - $2,500</td>
+                        <td>Schengen visa required for some</td>
+                    </tr>
+                    <tr>
+                        <td>Kyoto, Japan</td>
+                        <td>March - May, October - November</td>
+                        <td>$1,500 - $3,000</td>
+                        <td>Visa required for most countries</td>
+                    </tr>
+                    <tr>
+                        <td>Paris, France</td>
+                        <td>April - June, October</td>
+                        <td>$1,800 - $3,200</td>
+                        <td>Schengen visa required for some</td>
+                    </tr>
+                    <tr>
+                        <td>New York, USA</td>
+                        <td>April - June, September - November</td>
+                        <td>$2,000 - $4,000</td>
+                        <td>ESTA or visa required</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <section id="links">
+        <div class="container">
+            <div class="section-title">
+                <h2>Travel Resources</h2>
+                <p>Useful websites to help plan your perfect trip</p>
+            </div>
+            
+            <div class="travel-links">
+                <a href="https://www.booking.com" target="_blank">
+                    <i class="fas fa-hotel"></i> Booking.com
+                </a>
+                <a href="https://www.skyscanner.com" target="_blank">
+                    <i class="fas fa-plane"></i> Skyscanner
+                </a>
+                <a href="https://www.tripadvisor.com" target="_blank">
+                    <i class="fas fa-map-marked-alt"></i> TripAdvisor
+                </a>
+                <a href="https://www.lonelyplanet.com" target="_blank">
+                    <i class="fas fa-book-open"></i> Lonely Planet
+                </a>
+                <a href="https://www.airbnb.com" target="_blank">
+                    <i class="fas fa-home"></i> Airbnb
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Global Explorer Travel</h3>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#destinations">Destinations</a>
+                    <a href="#info">Travel Info</a>
+                    <a href="#links">Resources</a>
+                </div>
+                <p class="copyright">© 2023 Global Explorer Travel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
