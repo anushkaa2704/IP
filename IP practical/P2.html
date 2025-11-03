@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pink Paradise Travel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffeef2 100%);
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background-color: #ff6b93;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav li {
+            margin: 0 1.5rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #ff6b93;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title p {
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Lists Styling */
+        .list-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .list-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(255, 107, 147, 0.2);
+            transition: transform 0.3s;
+        }
+        
+        .list-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .list-card h3 {
+            color: #ff6b93;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .list-card h3 i {
+            margin-right: 10px;
+        }
+        
+        .list-card ul {
+            list-style-type: none;
+        }
+        
+        .list-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ffeef2;
+            display: flex;
+            align-items: center;
+        }
+        
+        .list-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .list-card li i {
+            color: #ff6b93;
+            margin-right: 10px;
+        }
+        
+        /* Frame/Video Styling */
+        .media-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .media-frame {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255, 107, 147, 0.2);
+        }
+        
+        .media-frame iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+        
+        .media-content {
+            padding: 1.5rem;
+        }
+        
+        .media-content h3 {
+            color: #ff6b93;
+            margin-bottom: 0.5rem;
+        }
+        
+        .media-content p {
+            color: #777;
+        }
+        
+        /* Multimedia Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255, 107, 147, 0.2);
+            height: 200px;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(255, 107, 147, 0.8));
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        /* Audio Player */
+        .audio-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(255, 107, 147, 0.2);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .audio-section h3 {
+            color: #ff6b93;
+            margin-bottom: 1.5rem;
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin: 1rem 0;
+        }
+        
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .audio-btn {
+            background: #ff6b93;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .audio-btn:hover {
+            background: #ff4d7d;
+            transform: scale(1.1);
+        }
+        
+        footer {
+            background-color: #ff6b93;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .footer-links a {
+            color: #ffeef3;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            margin-top: 1.5rem;
+            color: #ffeef3;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .list-container, .media-container, .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Pink Paradise Travel</h1>
+            <p>Your gateway to dream destinations with multimedia experiences</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#lists">Travel Lists</a></li>
+                <li><a href="#media">Travel Media</a></li>
+                <li><a href="#gallery">Photo Gallery</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section id="lists">
+        <div class="container">
+            <div class="section-title">
+                <h2>Travel Planning Lists</h2>
+                <p>Essential checklists for your perfect trip</p>
+            </div>
+            
+            <div class="list-container">
+                <div class="list-card">
+                    <h3><i class="fas fa-suitcase"></i> Packing Essentials</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Passport & Travel Documents</li>
+                        <li><i class="fas fa-check"></i> Comfortable Walking Shoes</li>
+                        <li><i class="fas fa-check"></i> Weather-appropriate Clothing</li>
+                        <li><i class="fas fa-check"></i> Universal Power Adapter</li>
+                        <li><i class="fas fa-check"></i> Portable Charger</li>
+                        <li><i class="fas fa-check"></i> Basic First Aid Kit</li>
+                        <li><i class="fas fa-check"></i> Reusable Water Bottle</li>
+                        <li><i class="fas fa-check"></i> Travel-sized Toiletries</li>
+                    </ul>
+                </div>
+                
+                <div class="list-card">
+                    <h3><i class="fas fa-utensils"></i> Must-Try Foods</h3>
+                    <ul>
+                        <li><i class="fas fa-ice-cream"></i> Gelato in Italy</li>
+                        <li><i class="fas fa-fish"></i> Sushi in Japan</li>
+                        <li><i class="fas fa-bread-slice"></i> Croissants in France</li>
+                        <li><i class="fas fa-pepper-hot"></i> Street Food in Thailand</li>
+                        <li><i class="fas fa-cheese"></i> Cheese in Netherlands</li>
+                        <li><i class="fas fa-drumstick-bite"></i> Barbecue in USA</li>
+                        <li><i class="fas fa-mug-hot"></i> Coffee in Colombia</li>
+                        <li><i class="fas fa-wine-glass-alt"></i> Wine in Argentina</li>
+                    </ul>
+                </div>
+                
+                <div class="list-card">
+                    <h3><i class="fas fa-map-marked-alt"></i> Bucket List Destinations</h3>
+                    <ul>
+                        <li><i class="fas fa-heart"></i> Santorini, Greece</li>
+                        <li><i class="fas fa-heart"></i> Bali, Indonesia</li>
+                        <li><i class="fas fa-heart"></i> Kyoto, Japan</li>
+                        <li><i class="fas fa-heart"></i> Paris, France</li>
+                        <li><i class="fas fa-heart"></i> New York, USA</li>
+                        <li><i class="fas fa-heart"></i> Sydney, Australia</li>
+                        <li><i class="fas fa-heart"></i> Cape Town, South Africa</li>
+                        <li><i class="fas fa-heart"></i> Rio de Janeiro, Brazil</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="media" style="background-color: #fff0f5;">
+    <div class="container">
+        <div class="section-title">
+            <h2>Travel Multimedia</h2>
+            <p>Experience destinations through videos and audio</p>
+        </div>
+        
+        <div class="media-container">
+            <div class="media-frame">
+                <video controls width="100%" height="200">
+                    <source src="./Wildlife Windows 7 Sample Video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="media-content">
+                    <h3>Santorini Dreams</h3>
+                    <p>Experience the magic of Santorini's white buildings and blue domes</p>
+                </div>
+            </div>
+            
+            <div class="media-frame">
+                <video controls width="100%" height="200">
+                    <source src="./Wildlife Windows 7 Sample Video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="media-content">
+                    <h3>Bali Paradise</h3>
+                    <p>Discover Bali's beautiful beaches, temples, and vibrant culture</p>
+                </div>
+            </div>
+            
+            <div class="media-frame">
+                <video controls width="100%" height="200">
+                    <source src="./Wildlife Windows 7 Sample Video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="media-content">
+                    <h3>Kyoto Traditions</h3>
+                    <p>Immerse yourself in Kyoto's ancient temples and gardens</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="audio-section">
+            <h3><i class="fas fa-music"></i> Travel Sounds: Ocean Waves</h3>
+            <p>Relax with the soothing sounds of the ocean</p>
+            <audio class="audio-player" controls>
+                <source src="https://www.soundjay.com/misc/sounds/ocean-waves-1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <div class="audio-controls">
+                <button class="audio-btn" onclick="document.querySelector('.audio-player').play()">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="audio-btn" onclick="document.querySelector('.audio-player').pause()">
+                    <i class="fas fa-pause"></i>
+                </button>
+                <button class="audio-btn" onclick="document.querySelector('.audio-player').volume += 0.1">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button class="audio-btn" onclick="document.querySelector('.audio-player').volume -= 0.1">
+                    <i class="fas fa-volume-down"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="gallery">
+    <div class="container">
+        <div class="section-title">
+            <h2>Travel Photo Gallery</h2>
+            <p>Beautiful moments from around the world</p>
+        </div>
+        
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Santorini">
+                <div class="gallery-overlay">
+                    <h4>Santorini, Greece</h4>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Bali">
+                <div class="gallery-overlay">
+                    <h4>Bali, Indonesia</h4>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Kyoto">
+                <div class="gallery-overlay">
+                    <h4>Kyoto, Japan</h4>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1431274172761-fca41d930114?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Paris">
+                <div class="gallery-overlay">
+                    <h4>Paris, France</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Pink Paradise Travel</h3>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#lists">Travel Lists</a>
+                    <a href="#media">Travel Media</a>
+                    <a href="#gallery">Photo Gallery</a>
+                </div>
+                <p class="copyright">© 2023 Pink Paradise Travel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple audio player functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.querySelector('.audio-player');
+            const playBtn = document.querySelector('.fa-play').parentElement;
+            const pauseBtn = document.querySelector('.fa-pause').parentElement;
+            
+            playBtn.addEventListener('click', function() {
+                audio.play();
+            });
+            
+            pauseBtn.addEventListener('click', function() {
+                audio.pause();
+            });
+        });
+    </script>
+</body>
+</html>
